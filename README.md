@@ -1,4 +1,4 @@
-# AI VTuber GameBot - Graduation Project Roadmap & Design Document
+# AI VTuber GameBot - Graduation Project Design Document & Roadmap
 
 ---
 
@@ -6,189 +6,196 @@
 
 **Project Title:** AI VTuber GameBot - Interactive AI VTuber that Watches, Learns, and Plays Games
 
-**Objective:**  
-Create an AI VTuber that can:
-- Watch gameplay videos, read gaming documents.
-- Learn game mechanics, strategies, and meta trends.
-- Play the game (semi-autonomous).
-- Interact with the audience via VTuber persona.
+**Objective:**
+- Xây dựng AI VTuber có khả năng:
+    - Xem video gameplay và đọc tài liệu hướng dẫn.
+    - Phân tích, học cơ chế game, cập nhật meta mới.
+    - Thực hiện thao tác chơi game bán tự động.
+    - Tương tác trực tiếp với người xem bằng nhân vật VTuber ảo.
 
-**Target Platform:** PC (Windows)
-
-**Technology Stack:**  
-- AI Models: GPT-4 (text), Whisper (speech-to-text), Stable Diffusion (visual assets), OpenCV (gameplay analysis)  
-- Framework: Python (backend processing), React (control dashboard)  
-- Game Interface: Computer Vision + Macro Command Execution  
-- VTuber Animation: VTube Studio API (or similar)  
-- Document Parsing: LangChain + PDF OCR (for reading game guides, patch notes)
+**Technology Stack:**
+- **AI Models:** GPT-4, Whisper, Stable Diffusion, OpenCV
+- **Backend:** Python
+- **Frontend:** React
+- **Data Processing:** LangChain, OCR, OpenCV
+- **VTuber Control:** VTube Studio API
 
 ---
 
-## 2. Key Features
+## 2. Architecture Overview
 
-| Feature | Description |
-|---|---|
-| Gameplay Analysis | Use OpenCV to capture screen data and identify game events (health bars, enemy location, etc.) |
-| Video Learning | Extract subtitles + action sequences from gameplay videos to learn strategies. |
-| Document Learning | Feed patch notes, guides into AI for understanding game meta. |
-| Interaction | VTuber reacts to in-game events, chats with viewers using GPT-generated responses. |
-| Decision Engine | Combines all learned data to make real-time gameplay decisions. |
+### 2.1 Data Ingestion
+- Gameplay Video (OBS Capture / Twitch API)
+- Document Parsing (LangChain + OCR)
+- Live Chat Monitoring (Twitch/YouTube API)
 
----
+### 2.2 Processing Core
+- OpenCV (Screen Analysis)
+- GPT-4 (Text Processing & Logic)
+- Whisper (Audio to Text)
 
-## 3. Architecture Diagram
-
-1. **Data Ingestion Layer**
-    - Gameplay Video Capture (OBS/Webcam Screen Capture)
-    - Document Parsing (LangChain + OCR)
-    - Live Chat Monitoring (YouTube/Twitch API)
-
-2. **Processing Layer**
-    - Computer Vision Analysis (OpenCV)
-    - Natural Language Processing (GPT-4 for text, Whisper for speech)
-    - Decision Making Engine (Custom Logic + Reinforcement Learning)
-
-3. **Action Layer**
-    - Game Interaction (Macro/Key Bindings via Python)
-    - VTuber Animation (VTube Studio API)
-    - Viewer Interaction (Chatbot + On-screen Reactions)
-
-4. **Data Storage**
-    - Knowledge Base (MongoDB or Firebase)
-    - Session Logs (Gameplay actions & outcomes)
+### 2.3 Output & Interaction
+- Python Macro (Game Controls)
+- VTube Studio API (VTuber Animation)
+- Chatbot Reply (GPT-generated)
 
 ---
 
-## 4. Development Roadmap (With Time Estimates & Resources)
+## 3. Detailed Development Roadmap with Phase Descriptions
 
-### Phase 1: Research & Setup (2 weeks, ~25 hours)
-- Research similar projects (Moon AI, TTF Yugioh Bot, etc.)
-- Explore tools: OpenCV, LangChain, Whisper
-- Setup project repo and initial framework
+### Phase 1: Research & Setup (2 weeks - 30 hours)
 
-📚 **Reference Links**:
-- [OpenCV Documentation](https://docs.opencv.org/)
-- [LangChain Documentation](https://docs.langchain.com/)
-- [OpenAI GPT API Docs](https://platform.openai.com/docs)
+#### Description
+- Nghiên cứu các dự án AI bot chơi game, đặc biệt là Moon AI.
+- Khảo sát OpenCV, Whisper, LangChain, VTube Studio API.
+- Setup repo, tạo môi trường backend (Python) và frontend (React).
+- Vẽ sơ đồ kiến trúc, chuẩn hóa luồng xử lý dữ liệu.
 
----
+#### Key Outputs
+- Tài liệu tổng hợp công nghệ.
+- Repo dự án ban đầu.
+- Môi trường làm việc hoàn chỉnh.
 
-### Phase 2: Data Collection & Training (3 weeks, ~40 hours)
-- Collect game videos and documents (guides, patch notes)
-- Build data pipelines for:
-    - Video frame extraction
-    - Subtitles + OCR text extraction
-- Fine-tune GPT for game-specific understanding
-
-📚 **Reference Links**:
-- [OpenCV Tutorials](https://docs.opencv.org/master/d9/df8/tutorial_root.html)
-- [LangChain Document Ingestion](https://docs.langchain.com/docs/components/document_loaders)
-
----
-
-### Phase 3: Core AI & Decision Engine (4 weeks, ~60 hours)
-- Implement game state analysis (health bars, cooldown detection)
-- Build logic combining:
-    - Video analysis (patterns of good players)
-    - Text-based learning (meta & patch notes)
-    - Real-time input (current game state)
-
-📚 **Reference Links**:
-- [Deep Learning with Python](https://www.deeplearningbook.org/)
-- [Reinforcement Learning Introduction](https://www.deepmind.com/learning-resources/reinforcement-learning)
-
----
-
-### Phase 4: VTuber Integration (2 weeks, ~30 hours)
-- Integrate VTube Studio API
-- Sync AI reactions to game events
-- Build overlay for VTuber + live data feed
-
-📚 **Reference Links**:
+#### Reference Links
+- [OpenCV Docs](https://docs.opencv.org/)
+- [LangChain Docs](https://docs.langchain.com/)
 - [VTube Studio API](https://github.com/DenchiSoft/VTubeStudio)
 
 ---
 
-### Phase 5: Testing & Optimization (3 weeks, ~35 hours)
-- Test against different game scenarios
-- Collect error data for refining AI logic
-- Tune response time & visual reaction sync
+### Phase 2: Data Collection & Training (3 weeks - 45 hours)
+
+#### Description
+- Thu thập video gameplay (YouTube, Twitch).
+- Trích xuất frame bằng OpenCV.
+- Chuyển audio sang text với Whisper.
+- Tìm và tóm tắt tài liệu patch notes, hướng dẫn bằng LangChain.
+- Định dạng dữ liệu vào JSON để sẵn sàng huấn luyện.
+
+#### Key Outputs
+- Bộ dataset gameplay video + text.
+- Hệ pipeline thu thập, xử lý dữ liệu hoàn chỉnh.
+
+#### Reference Links
+- [Whisper by OpenAI](https://github.com/openai/whisper)
+- [Twitch API Docs](https://dev.twitch.tv/docs)
 
 ---
 
-### Phase 6: Final Presentation & Documentation (1 week, ~15 hours)
-- Prepare demo video
-- Create final documentation & presentation slides
+### Phase 3: Core AI & Decision Engine (4 weeks - 60 hours)
+
+#### Description
+- Xây hệ thống phân tích trạng thái game (máu, kỹ năng).
+- Tích hợp logic ra quyết định dựa trên:
+    - Phân tích video.
+    - Học từ tài liệu (meta, patch notes).
+    - Trạng thái game thực tế.
+- Huấn luyện Reinforcement Learning để tối ưu hành động.
+
+#### Key Outputs
+- Module nhận diện trạng thái game.
+- Decision Engine v1 (phối hợp logic từ nhiều nguồn).
+
+#### Reference Links
+- [Reinforcement Learning Intro](https://spinningup.openai.com/en/latest/)
 
 ---
 
-## 5. Technical Challenges & Solutions
+### Phase 4: VTuber Integration (2 weeks - 30 hours)
 
-| Challenge | Solution |
+#### Description
+- Kết nối AI với VTube Studio API.
+- Xây dựng animation script cho VTuber dựa trên sự kiện game.
+- Tạo overlay giao diện stream.
+
+#### Key Outputs
+- VTuber phản ứng theo thời gian thực.
+- Overlay hiển thị trạng thái AI + game.
+
+#### Reference Links
+- [VTube Studio API](https://github.com/DenchiSoft/VTubeStudio)
+
+---
+
+### Phase 5: Testing & Optimization (3 weeks - 45 hours)
+
+#### Description
+- Test nhiều kịch bản game khác nhau.
+- Ghi log lỗi, refine logic.
+- Tối ưu tốc độ xử lý, độ mượt khi tương tác VTuber.
+
+#### Key Outputs
+- Bản AI Bot hoàn thiện.
+- Báo cáo test case & kết quả tối ưu.
+
+#### Reference Links
+- [Best Practices in Game Bot Testing](https://blog.robomq.io/best-practices-for-automation-testing)
+
+---
+
+### Phase 6: Final Presentation & Documentation (1 week - 15 hours)
+
+#### Description
+- Dựng video demo.
+- Chuẩn bị bài thuyết trình.
+- Hoàn thiện tài liệu báo cáo tốt nghiệp.
+
+#### Key Outputs
+- Video demo.
+- Slide thuyết trình.
+- Tài liệu tổng kết.
+
+#### Reference Links
+- [How to Make Effective Project Presentations](https://www.presentationzen.com/)
+
+---
+
+## 4. Security & Ethical Considerations
+
+| Vấn đề | Giải pháp |
 |---|---|
-| Real-time Analysis Lag | Use multi-threading to separate capture, analysis, and action layers |
-| Complex Game Events | Pre-train AI on video datasets with labeled events (kills, deaths, objectives) |
-| Document Comprehension | Use LangChain to chunk and summarize large documents for faster training |
-| VTuber Animation Sync | Use event hooks to trigger animations immediately when conditions are met |
+| Dữ liệu nhạy cảm | Ẩn thông tin cá nhân người chơi khi livestream |
+| Xử lý tài liệu bên ngoài | Kiểm tra và lọc nội dung độc hại từ tài liệu input |
+| Bias AI | Review & filter output của GPT để tránh bias và toxic |
 
 ---
 
-## 6. Security Considerations
+## 5. Tools & Tech Stack Summary
 
-- **Data Privacy:** Avoid streaming unnecessary player data.
-- **Injection Prevention:** Sanitize any external document input.
-- **Model Bias Check:** Review model responses for toxicity or unfair bias.
-
----
-
-## 7. Tools & References
-
-| Tool | Purpose |
+| Công cụ | Vai trò |
 |---|---|
-| Python | Main backend logic |
-| React | Dashboard (control panel, log viewer) |
-| OpenCV | Video & screen processing |
-| LangChain | Document ingestion & summarization |
-| GPT-4 | Text generation & decision logic |
-| Whisper | Speech-to-text from videos |
-| VTube Studio | VTuber animation control |
-| OBS Studio | Screen recording & streaming |
+| Python | Xử lý backend & AI logic |
+| React | Dashboard điều khiển & giao diện |
+| OpenCV | Xử lý video & màn hình |
+| LangChain | Đọc và tóm tắt tài liệu |
+| GPT-4 | Phân tích ngôn ngữ & sinh phản hồi |
+| Whisper | Nhận dạng giọng nói từ video |
+| VTube Studio | Điều khiển VTuber |
+| OBS Studio | Ghi hình và livestream |
 
 ---
 
-## 8. Additional Resources (for Self-Learning)
+## 6. Final Deliverables
 
-### AI & Computer Vision
-- [OpenCV Documentation](https://docs.opencv.org/)
-- [LangChain Documentation](https://docs.langchain.com/)
-- [OpenAI GPT API Docs](https://platform.openai.com/docs)
-
-### VTuber Control
-- [VTube Studio API Documentation](https://github.com/DenchiSoft/VTubeStudio)
-
-### Game Bot Projects (References)
-- [TFT Bot by Manifold](https://manifold.ai)
-- [TTF Yugioh AI Bot Analysis](https://www.youtube.com/watch?v=XXXXX)  
-(Note: Replace XXXXX with actual video if available)
+- Source Code (GitHub Repository)
+- Demo Video (YouTube/Drive Link)
+- Project Report (Markdown + PDF)
+- Presentation Slides (PowerPoint)
 
 ---
 
-## 9. Final Deliverables
+## 7. Additional Learning Resources
 
-- ✅ Source Code (GitHub Repo)
-- ✅ Demo Video (YouTube Link)
-- ✅ Full Documentation (Markdown + PDF)
-- ✅ Presentation Slides (PowerPoint)
-
----
-
-## 10. Contact
-
-**Author:** Your Name  
-**University:** Your University  
-**Advisor:** Advisor's Name  
-**Contact:** your-email@example.com
+- [LangChain Tutorials](https://blog.langchain.dev/)
+- [AI in Gaming Research Papers](https://arxiv.org/list/cs.AI/recent)
+- [Building Game AI Bots](https://towardsdatascience.com/building-game-bots-using-reinforcement-learning-12399a7e7341)
 
 ---
 
-**End of Document**
+**Project Lead:** [Your Name]  
+**University:** [Your University Name]  
+**Advisor:** [Advisor Name]  
+**Contact:** [Your Email]
+
+---
+
